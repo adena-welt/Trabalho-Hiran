@@ -593,7 +593,8 @@ void imprimirOpcoes(int menu){
 
     if(menu == 1){
         printf("\nInserir elementos na:\n");
-        printf("1 - Arvore\n");
+        printf("1 - Arquivo\n");
+        printf("2 - Digitar\n");
     }
 
     if(menu == 2){
@@ -611,16 +612,21 @@ void imprimirOpcoes(int menu){
 }
 
 void menuInsercaoArvore(){
-    int opcao = -1;
+    int opcao = -1, valor;
     char nomeDoArquivo[12];
     imprimirOpcoes(1);
     scanf("%d", &opcao);
     switch(opcao){
         case 1:
-            printf("\nColoque o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
+            printf("\n1-Digitar o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
             scanf("%s", nomeDoArquivo);
             lerArquivo(&arvore, nomeDoArquivo);
             break;
+        case 2:{ 
+            printf("\n1-Digite o elemento a ser inserido na arvore: \n");
+            scanf("%d", &valor);
+            inserirElemento(valor, &arvore);
+        }
         default:
             printf("Opcao Invalida.\n");
     }
