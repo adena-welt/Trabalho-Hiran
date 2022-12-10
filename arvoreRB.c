@@ -578,46 +578,6 @@ void imprimirArvore(tipoNo *raiz){
         printf("%s\n", string[i]);
 }
 
-void imprimirOpcoes(int menu){
-
-    if(menu == 0){
-        printf("\n***************************** ARVORE RUBRO-NEGRA *****************************\n");
-        printf("\nEscolha a opcao que gostaria de utilizar:\n");
-        printf("1 - Inserir elementos na arvore.\n");
-        printf("2 - Remover elementos na arvore.\n");
-        printf("3 - Imprimir elementos da arvore.\n");
-        printf("4 - Buscar um elemento na arvore.\n");
-        printf("0 - Sair do programa.\n\n");
-        printf("Opcao: ");
-    }
-
-    if(menu == 1){
-        printf("\nInserir elementos na árvore:\n");
-        printf("1 - Arquivo\n");
-        printf("2 - Digitar\n");
-    }
-}
-
-void menuInsercaoArvore(){
-    int opcao = -1, valor;
-    char nomeDoArquivo[12];
-    imprimirOpcoes(1);
-    scanf("%d", &opcao);
-    switch(opcao){
-        case 1:
-            printf("\n1-Digitar o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
-            scanf("%s", nomeDoArquivo);
-            lerArquivo(&arvore, nomeDoArquivo);
-            break;
-        case 2:{ 
-            printf("\n1-Digite o elemento a ser inserido na arvore: \n");
-            scanf("%d", &valor);
-            inserirArvore(valor, &arvore);
-            printf("\nElemento inserido na árvore com sucesso.");
-        }
-    }
-}
-
 void pausa(){//funçao de pausaro sistema
     int ch;
     while((ch = fgetc(stdin)) != EOF && ch != '\n');//ja limpa o buffer antes
@@ -629,14 +589,39 @@ int main(){
 
     criarArvore(&arvore);
     tipoNo* aux;
-    int opcao = -1, elemento;
+    int opcao = -1, elemento, op, valor;
+    char nomeDoArquivo[12];
 
     while(opcao != 0){
-        imprimirOpcoes(0);
+        
+        printf("\n***************************** ARVORE RUBRO-NEGRA *****************************\n");
+        printf("\nEscolha a opcao que gostaria de utilizar:\n");
+        printf("1 - Inserir elementos na arvore.\n");
+        printf("2 - Remover elementos na arvore.\n");
+        printf("3 - Imprimir elementos da arvore.\n");
+        printf("4 - Buscar um elemento na arvore.\n");
+        printf("0 - Sair do programa.\n\n");
+        printf("Opcao: ");
         scanf("%d", &opcao);
+
         switch(opcao){
             case 1:
-                menuInsercaoArvore();
+                printf("\nInserir elementos na árvore:\n");
+                printf("1 - Arquivo\n");
+                printf("2 - Digitar\n");
+
+                scanf("%d", &op);
+                if(op==1){
+                    printf("\nDigite o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
+                    scanf("%s", nomeDoArquivo);
+                    lerArquivo(&arvore, nomeDoArquivo);
+                }
+                else if(op==2){
+                     printf("\nDigite o elemento a ser inserido na arvore: \n");
+                    scanf("%d", &valor);
+                    inserirArvore(valor, &arvore);
+                    printf("\nElemento inserido na árvore com sucesso.\n");
+                }
                 pausa();
                 break;
             case 2:
