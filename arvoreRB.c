@@ -592,22 +592,9 @@ void imprimirOpcoes(int menu){
     }
 
     if(menu == 1){
-        printf("\nInserir elementos na:\n");
+        printf("\nInserir elementos na árvore:\n");
         printf("1 - Arquivo\n");
         printf("2 - Digitar\n");
-    }
-
-    if(menu == 2){
-        printf("\nRemover elemento da:\n");
-        printf("1 - Arvore\n");
-    }
-    if(menu == 3){
-        printf("\nImprimir:\n");
-        printf("1 - Arvore\n");
-    }
-    if(menu == 4){
-        printf("\nBuscar elemento na:\n");
-        printf("1 - Arvore\n");
     }
 }
 
@@ -626,106 +613,74 @@ void menuInsercaoArvore(){
             printf("\n1-Digite o elemento a ser inserido na arvore: \n");
             scanf("%d", &valor);
             inserirArvore(valor, &arvore);
+            printf("\nElemento inserido na árvore com sucesso.");
         }
-        default:
-            printf("Opcao Invalida.\n");
     }
 }
 
-void menuRemocaoArvore(){
+void pausa(){//funçao de pausaro sistema
+    int ch;
+    while((ch = fgetc(stdin)) != EOF && ch != '\n');//ja limpa o buffer antes
+    printf ("\nPressione qualquer tecla para continuar...");
+    scanf("%*c");//não PRECISO LIMPAR O BUFFER porque O USUARIO não VAI DIGITAR NADA
+}
+
+int main(){
+
+    criarArvore(&arvore);
     tipoNo* aux;
-    int opcao = -1;
-    int elemento;
-    imprimirOpcoes(2);
-    scanf("%d", &opcao);
-    switch(opcao){
-        case 1:
-        	printf("\nEscolha um elemento para remover da arvore: ");
-            scanf("%d", &elemento);
-            aux = buscarNaArvore(elemento, arvore);
-            if(aux){
-                removerDaArvore(elemento, &arvore);
-                printf("\nSucesso. O elemento foi removido.\n");
-            } else printf("\nEste elemento nao esta na arvore.\n");
-            break;
-        default:
-            printf("Opcao Invalida.\n\n");
-    }
-}
+    int opcao = -1, elemento;
 
-void menuImpressaoArvore(){
-    int opcao;
-    imprimirOpcoes(3);
-    scanf("%d", &opcao);
-    switch(opcao){
-        case 1:
-            if(arvore.topo == NULL){
-                printf("Arvore vazia!\n");
-            }
-            else {
-                imprimirArvore(arvore.topo);
-            }
-            break;
-        default:
-            printf("Opcao Invalida\n\n");
-    }
-}
-
-void menuBuscaArvore(){
-    int opcao;
-    int elemento;
-    tipoNo *aux;
-    imprimirOpcoes(4);
-    scanf("%d", &opcao);
-    switch(opcao){
-        case 1:
-            printf("\nEscolha um elemento para buscar: ");
-            scanf("%d", &elemento);
-            aux = buscarNaArvore(elemento, arvore);
-            if(aux){
-                printf("\nElemento encontrado!\n");
-            }
-            else {
-                printf("\nElemento nao encontrado!\n");
-            }
-            break;
-        default:
-            printf("Opcao invalida.\n\n");
-            break;
-    }
-}
-
-void menuInicial(){
-
-    int opcao = -1;
     while(opcao != 0){
         imprimirOpcoes(0);
         scanf("%d", &opcao);
         switch(opcao){
             case 1:
                 menuInsercaoArvore();
+                pausa();
                 break;
             case 2:
-                menuRemocaoArvore();
+                printf("\nEscolha um elemento para remover da arvore: ");
+                scanf("%d", &elemento);
+                aux = buscarNaArvore(elemento, arvore);
+                if(aux){
+                    removerDaArvore(elemento, &arvore);
+                    printf("\nSucesso. O elemento foi removido.\n");
+                } else printf("\nEste elemento nao esta na arvore.\n");
+                pausa();
                 break;
             case 3:
-                menuImpressaoArvore();
+                if(arvore.topo == NULL){
+                    printf("Arvore vazia!\n");
+                }
+                else {
+                    imprimirArvore(arvore.topo);
+                }
+                pausa();
                 break;
             case 4:
-                menuBuscaArvore();
+                int elemento;
+                tipoNo *aux;
+                
+                printf("\nEscolha um elemento para buscar: ");
+                scanf("%d", &elemento);
+                aux = buscarNaArvore(elemento, arvore);
+                if(aux){
+                    printf("\nElemento encontrado!\n");
+                }
+                else {
+                    printf("\nElemento nao encontrado!\n");
+                }
+                pausa();
                 break;
             case 0:
                 break;
         default:
             printf("Opcao invalida.\n\n");
+            pausa();
         }
+        system("clear||cls");
     }
-}
-
-int main(){
-
-    criarArvore(&arvore);
-    menuInicial();
 
     return 0;
 }
