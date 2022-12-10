@@ -548,17 +548,13 @@ int imprimirArvoreInterno(tipoNo *raiz, int e_esquerda, int distancia, int nivel
         str[nivelAtual][distancia + esquerda + i] = strAux[i];
 
     if (nivelAtual && e_esquerda) {
-
         for (i = 0; i < tamanhoNo + direita; i++)
             str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2 + i] = '-';
-
         str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2] = '.';
 
     } else if (nivelAtual && !e_esquerda) {
-
         for (i = 0; i < esquerda + tamanhoNo; i++)
             str[nivelAtual - 1][distancia - tamanhoNo/2 + i] = '-';
-
         str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2] = '.';
     }
 
@@ -577,6 +573,30 @@ void imprimirArvore(tipoNo *raiz){
     for (i = 0; i < alt; i++)
         printf("%s\n", string[i]);
 }
+
+void imprimirOrdem(tipoNo *raiz, int op) {
+	if (raiz == NULL) 
+		return;
+
+	if(op == 1){
+	    printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
+		imprimirOrdem(raiz->noEsquerdo, op);
+		imprimirOrdem(raiz->noDireito, op);
+	}
+	else if(op == 2){
+	   imprimirOrdem(raiz->noEsquerdo, op);
+	   printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
+	   imprimirOrdem(raiz->noDireito, op);
+	}
+    else if(op == 3){
+	   imprimirOrdem(raiz->noEsquerdo, op);
+	   imprimirOrdem(raiz->noDireito, op);
+       printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
+	}
+	else
+	   printf("Opcao invalida, voltando ao menu...");
+}
+
 
 void pausa(){//funçao de pausaro sistema
     int ch;
@@ -609,8 +629,8 @@ int main(){
                 printf("\nInserir elementos na árvore:\n");
                 printf("1 - Arquivo\n");
                 printf("2 - Digitar\n");
-
                 scanf("%d", &op);
+
                 if(op==1){
                     printf("\nDigite o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
                     scanf("%s", nomeDoArquivo);
@@ -635,10 +655,25 @@ int main(){
                 pausa();
                 break;
             case 3:
+                printf("\nInserir elementos:\n");
+                printf("1 - Pre-Ordem\n");
+                printf("2 - In-Ordem\n");
+                printf("3 - Pos-Ordem\n");
+                printf("4 - Arvore\n");
+                scanf("%d", &op);
                 if(arvore.topo == NULL){
                     printf("Arvore vazia!\n");
                 }
-                else {
+                else if(op==1){
+                    imprimirOrdem(arvore.topo, op);
+                }
+                else if(op==2){
+                    imprimirOrdem(arvore.topo, op);
+                }
+                else if(op==3){
+                    imprimirOrdem(arvore.topo, op);
+                }
+                else if(op==4){
                     imprimirArvore(arvore.topo);
                 }
                 pausa();
