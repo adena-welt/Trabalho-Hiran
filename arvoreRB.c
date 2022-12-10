@@ -625,7 +625,7 @@ void menuInsercaoArvore(){
         case 2:{ 
             printf("\n1-Digite o elemento a ser inserido na arvore: \n");
             scanf("%d", &valor);
-            inserirElemento(valor, &arvore);
+            inserirArvore(valor, &arvore);
         }
         default:
             printf("Opcao Invalida.\n");
