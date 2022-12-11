@@ -16,7 +16,6 @@ tipoNo* noAvo(tipoNo *n){
     }
 }
 
-
 tipoNo* noIrmao(tipoNo *n){
     if(n == NULL){
         return NULL;
@@ -42,7 +41,6 @@ tipoNo* noTio(tipoNo *n){
 
     return noIrmao(n->noPai);
 }
-
 
 tipoNo* rotacaoEsquerda(tipoNo* raiz, tipoNo* n){
     tipoNo* r = n->noDireito;
