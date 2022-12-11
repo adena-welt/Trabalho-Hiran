@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "estruturas.h"
+#include "arq.h"
 
 int main(){
 
