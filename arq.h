@@ -33,9 +33,7 @@ void rotacaoDireitaRR(tipoNo **x){
 int verificaCor(tipoNo* n){
     if(n == NULL){
         return NEG;
-    }
-
-    else{
+    }else{
         return n->cor;
     }
 }
@@ -55,9 +53,7 @@ void lerArquivo(tipoArvore *arvore, char *nomeArquivo){
     arquivo = fopen(nomeArquivo, "r");
     if(arquivo == 0){
         printf("\nNao existe o arquivo na pasta do programa.\n\n");
-    }
-
-    else {
+    }else {
         while((fscanf(arquivo,"%d",&valor) != EOF)){
             inserirArvore(valor, arvore);
         }
@@ -69,8 +65,7 @@ void lerArquivo(tipoArvore *arvore, char *nomeArquivo){
 int maior(int numeroA, int numeroB){
     if(numeroA > numeroB){
         return numeroA;
-    }
-    else {
+    } else {
         return numeroB;
     }
 }
@@ -78,8 +73,7 @@ int maior(int numeroA, int numeroB){
 int calculaAltura(tipoNo *raiz){
     if(raiz == NULL){
         return 0;
-    }
-    else {
+    }else {
         return (maior(calculaAltura(raiz->noEsquerdo),calculaAltura(raiz->noDireito)) + 1);
     }
 }
@@ -92,9 +86,7 @@ int imprimirArvoreInterno(tipoNo *raiz, int e_esquerda, int distancia, int nivel
 
     if(raiz->cor == RUB){
         sprintf(strAux,"%04d(V)",raiz->dado);
-    }
-
-    else{
+    }else{
         sprintf(strAux,"%04d(P)",raiz->dado);
     }
 
@@ -109,7 +101,7 @@ int imprimirArvoreInterno(tipoNo *raiz, int e_esquerda, int distancia, int nivel
             str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2 + i] = '-';
         str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2] = '.';
 
-    } else if (nivelAtual && !e_esquerda) {
+    }else if (nivelAtual && !e_esquerda) {
         for (i = 0; i < esquerda + tamanhoNo; i++)
             str[nivelAtual - 1][distancia - tamanhoNo/2 + i] = '-';
         str[nivelAtual - 1][distancia + esquerda + tamanhoNo/2] = '.';
@@ -139,17 +131,14 @@ void imprimirOrdem(tipoNo *raiz, int op) {//funçao que imprime em pos,in ou pre
 	    printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
 		imprimirOrdem(raiz->noEsquerdo, op);
 		imprimirOrdem(raiz->noDireito, op);
-	}
-	else if(op == 2){
+	}else if(op == 2){
 	   imprimirOrdem(raiz->noEsquerdo, op);
 	   printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
 	   imprimirOrdem(raiz->noDireito, op);
-	}
-    else if(op == 3){
+	}else if(op == 3){
 	   imprimirOrdem(raiz->noEsquerdo, op);
 	   imprimirOrdem(raiz->noDireito, op);
        printf("Chave: %d / Cor: %d\n\n", raiz->dado, raiz->cor);
-	}
-	else
+	}else
 	   printf("Opcao invalida, voltando ao menu...");
 }

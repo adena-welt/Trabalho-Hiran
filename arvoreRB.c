@@ -32,8 +32,7 @@ int main(){
                     printf("\nDigite o nome do arquivo para a insercao de elementos na arvore:\nO arquivo deve ter no maximo 12 caracteres no nome\n");
                     scanf("%s", nomeDoArquivo);
                     lerArquivo(&arvore, nomeDoArquivo);
-                }
-                else if(op==2){
+                }else if(op==2){
                      printf("\nDigite o elemento a ser inserido na arvore: \n");
                     scanf("%d", &valor);
                     inserirArvore(valor, &arvore);
@@ -48,7 +47,7 @@ int main(){
                 if(aux){
                     removerDaArvore(elemento, &arvore);
                     printf("\nSucesso. O elemento foi removido.\n");
-                } else printf("\nEste elemento nao esta na arvore.\n");
+                }else printf("\nEste elemento nao esta na arvore.\n");
                 pausa();
                 break;
             case 3:
@@ -60,17 +59,13 @@ int main(){
                 scanf("%d", &op);
                 if(arvore.topo == NULL){
                     printf("Arvore vazia!\n");
-                }
-                else if(op==1){
+                }else if(op==1){
                     imprimirOrdem(arvore.topo, op);
-                }
-                else if(op==2){
+                }else if(op==2){
                     imprimirOrdem(arvore.topo, op);
-                }
-                else if(op==3){
+                }else if(op==3){
                     imprimirOrdem(arvore.topo, op);
-                }
-                else if(op==4){
+                }else if(op==4){
                     imprimirArvore(arvore.topo);
                 }
                 pausa();
@@ -84,8 +79,7 @@ int main(){
                 aux = buscarNaArvore(elemento, arvore);
                 if(aux){
                     printf("\nElemento encontrado!\n");
-                }
-                else {
+                }else {
                     printf("\nElemento nao encontrado!\n");
                 }
                 pausa();

@@ -9,9 +9,7 @@ tipoNo* noAvo(tipoNo *n){
 
     if(n->noPai == NULL){
         return NULL;
-    }
-
-    else{
+    }else{
         return n->noPai->noPai;
     }
 }
@@ -27,9 +25,7 @@ tipoNo* noIrmao(tipoNo *n){
 
     if(n == n->noPai->noEsquerdo){
         return n->noPai->noDireito;
-    }
-
-    else{
+    }else{
         return n->noPai->noEsquerdo;
     }
 }
@@ -51,13 +47,9 @@ tipoNo* rotacaoEsquerda(tipoNo* raiz, tipoNo* n){
 
     if(raiz == n){
         raiz = r;
-    }
-
-    else if(n == n->noPai->noEsquerdo){
+    }else if(n == n->noPai->noEsquerdo){
         n->noPai->noEsquerdo = r;
-    }
-
-    else{
+    }else{
         n->noPai->noDireito = r;
     }
 
@@ -83,13 +75,9 @@ tipoNo* rotacaoDireita(tipoNo* raiz, tipoNo* n){
 
     if(raiz == n){
         raiz = l;
-    }
-
-    else if(n == n->noPai->noEsquerdo){
+    }else if(n == n->noPai->noEsquerdo){
         n->noPai->noEsquerdo = l;
-    }
-
-    else{
+    }else{
         n->noPai->noDireito = l;
     }
 
@@ -112,9 +100,7 @@ tipoNo* balanceamentoCaso5(tipoNo* raiz, tipoNo* n){
 
     if(n == n->noPai->noEsquerdo && n->noPai == noAvo(n)->noEsquerdo){
         raiz = rotacaoDireita(raiz, noAvo(n));
-    }
-
-    else if(n == n->noPai->noDireito && n->noPai == noAvo(n)->noDireito){
+    }else if(n == n->noPai->noDireito && n->noPai == noAvo(n)->noDireito){
         raiz = rotacaoEsquerda(raiz, noAvo(n));
     }
 
@@ -125,9 +111,7 @@ tipoNo* balanceamentoCaso4(tipoNo* raiz, tipoNo* n){
     if(n == n->noPai->noDireito && n->noPai == noAvo(n)->noEsquerdo){
         raiz = rotacaoEsquerda(raiz, n->noPai);
         n = n->noEsquerdo;
-    }
-
-    else if(n == n->noPai->noEsquerdo && n->noPai == noAvo(n)->noDireito){
+    } else if(n == n->noPai->noEsquerdo && n->noPai == noAvo(n)->noDireito){
         raiz = rotacaoDireita(raiz, n->noPai);
         n = n->noDireito;
     }
@@ -143,9 +127,7 @@ tipoNo* balanceamentoCaso3(tipoNo* raiz, tipoNo* n){
         noTio(n)->cor = NEG;
         noAvo(n)->cor = RUB;
         return balanceamentoCaso1(raiz, noAvo(n));
-    }
-
-    else{
+    }else{
         return balanceamentoCaso4(raiz, n);
     }
 }
@@ -153,9 +135,7 @@ tipoNo* balanceamentoCaso3(tipoNo* raiz, tipoNo* n){
 tipoNo* balanceamentoCaso2(tipoNo* raiz, tipoNo* n){
     if(n->noPai->cor == NEG){
         return raiz;
-    }
-
-    else{
+    } else{
         return balanceamentoCaso3(raiz, n);
     }
 }
@@ -164,9 +144,7 @@ tipoNo* balanceamentoCaso1(tipoNo* raiz, tipoNo* n){
     if(n->noPai == NULL){
         n->cor = NEG;
         return raiz;
-    }
-
-    else{
+    } else{
         return balanceamentoCaso2(raiz, n);
     }
 }
@@ -197,28 +175,20 @@ tipoNo* inserirElemento(int numero, tipoNo *raiz){
         if(novo->dado == aux->dado){
             free (novo);
             return raiz;
-        }
-
-        else if(novo->dado < aux->dado){
+        }else if(novo->dado < aux->dado){
             if(aux->noEsquerdo == NULL){
                 aux->noEsquerdo = novo;
                 novo->noPai = aux;
                 return balanceamentoCaso1(raiz, novo);
-            }
-
-            else{
+            }else{
                 aux = aux->noEsquerdo;
             }
-        }
-
-        else {
+        }else {
             if (aux->noDireito == NULL){
                 aux->noDireito = novo;
                 novo->noPai = aux;
                 return balanceamentoCaso1(raiz, novo);
-            }
-
-            else{
+            }else{
                 aux = aux->noDireito;
             }
         }
@@ -249,8 +219,7 @@ tipoNo* maiorDosMenores(tipoNo *raiz){
 
     if(aux == NULL){
         return NULL;
-    }
-    else{
+    }else{
         while (aux->noDireito != NULL){
             aux = aux->noDireito;
         }
@@ -266,8 +235,7 @@ tipoNo* menorDosMaiores(tipoNo *raiz){
 
     if(aux == NULL){
         return NULL;
-    }
-    else{
+    }else{
         while(aux->noEsquerdo != NULL){
             aux = aux->noEsquerdo;
         }
@@ -293,9 +261,7 @@ tipoNo* conserta(tipoNo** raiz, tipoNo* no){
                 aux->cor = RUB;
                 no = no->noPai;
                 continue;
-            }
-
-            else if(verificaCor(aux->noDireito) == RUB){
+            }else if(verificaCor(aux->noDireito) == RUB){
                 aux->noEsquerdo->cor = NEG;
                 aux->cor = RUB;
                 rotacaoDireitaRR(&aux);
@@ -307,9 +273,7 @@ tipoNo* conserta(tipoNo** raiz, tipoNo* no){
             aux->noDireito->cor = NEG;
             rotacaoEsquerdaRR(&no->noPai);
             no = *raiz;
-        }
-
-        else{
+        }else{
             aux = no->noPai->noEsquerdo;
 
             if(verificaCor(aux) == RUB){
@@ -324,9 +288,7 @@ tipoNo* conserta(tipoNo** raiz, tipoNo* no){
                 aux->cor = RUB;
                 no = no->noPai;
                 continue;
-            }
-
-            else if(verificaCor(aux->noEsquerdo) == RUB){
+            }else if(verificaCor(aux->noEsquerdo) == RUB){
                 aux->noDireito->cor = NEG;
                 aux->cor = RUB;
                 rotacaoEsquerdaRR(&aux);
@@ -350,20 +312,15 @@ tipoNo* conserta(tipoNo** raiz, tipoNo* no){
 tipoNo* transplante(tipoNo **raiz, tipoNo* no,tipoNo* noAux){
     if(no->noPai == NULL){
         *raiz = noAux;
-    }
-
-    else if(no == no->noPai->noEsquerdo){
+    }else if(no == no->noPai->noEsquerdo){
         no->noPai->noEsquerdo = noAux;
-    }
-
-    else{
+    }else{
         no->noPai->noDireito = noAux;
     }
 
     if(noAux == NULL){
         return *raiz;
-    }
-    else{
+    }else{
         noAux->noPai = no->noPai;
         return *raiz;
     }
@@ -387,14 +344,10 @@ tipoNo* removerElemento(int numero, tipoNo *raiz){
     if(no->noEsquerdo == NULL){
         aux = no->noDireito;
         transplante(&raiz,no, no->noDireito);
-    }
-
-    else if(no->noDireito == NULL){
+    }else if(no->noDireito == NULL){
         aux = no->noEsquerdo;
         transplante(&raiz, no, no->noEsquerdo);
-    }
-
-    else{
+    }else{
         M = menorDosMaiores(no);
         auxCor = M->cor;
         aux = M->noDireito;
@@ -403,9 +356,7 @@ tipoNo* removerElemento(int numero, tipoNo *raiz){
             if(aux != NULL){
                 aux->noPai = M;
             }
-        }
-
-        else{
+        }else{
             transplante(&raiz, M, M->noDireito);
             M->noDireito = no->noDireito;
             M->noDireito->noPai = M;
